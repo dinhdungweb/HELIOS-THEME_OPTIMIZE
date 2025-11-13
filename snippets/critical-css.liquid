@@ -1,0 +1,59 @@
+/* Critical CSS - Above the fold styles */
+/* Inline critical styles for faster FCP */
+
+/* Reset & Base */
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body-family);font-size:var(--font-body-size);line-height:1.6;color:var(--color-text)}
+*,*::before,*::after{box-sizing:border-box}
+
+/* Typography */
+h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-heading-family);font-weight:var(--font-heading-weight);line-height:1.2}
+a{background:transparent;text-decoration:none;color:inherit}
+img{border:0;max-width:100%;height:auto;display:block}
+
+/* Header/Navigation - Critical for above fold */
+#site-control{position:relative;z-index:100;width:100%;transition:background-color 0.3s ease}
+.site-control__inner{display:flex;align-items:center;justify-content:space-between;padding:15px 20px}
+.logo{display:inline-block;max-width:200px}
+.logo img{width:auto;height:auto;max-height:50px}
+
+/* Hero Section - Critical for LCP */
+.background-video-responsive{position:relative;width:100%;overflow:hidden;background:#000}
+.background-video-responsive video{width:100%;height:100%;object-fit:cover;display:block}
+.background-video-responsive__poster{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1}
+
+/* Layout */
+#page-content{position:relative}
+.container{max-width:1400px;margin:0 auto;padding:0 20px}
+
+/* Prevent FOUT */
+.wf-loading body{opacity:0}
+.wf-active body,.wf-inactive body{opacity:1;transition:opacity 0.3s}
+
+/* Loading state */
+body.loading{overflow:hidden}
+
+/* Mobile optimizations */
+@media (max-width:768px){
+  .site-control__inner{padding:10px 15px}
+  .logo{max-width:150px}
+  .logo img{max-height:40px}
+  .container{padding:0 15px}
+}
+
+/* Prevent CLS */
+.background-video-responsive{min-height:600px}
+@media (max-width:768px){
+  .background-video-responsive{min-height:400px}
+}
+
+/* Critical animations */
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+.fade-in{animation:fadeIn 0.3s ease-in}
+
+/* Aspect ratio boxes to prevent CLS */
+.aspect-ratio{position:relative;width:100%;height:0;overflow:hidden}
+.aspect-ratio--16-9{padding-bottom:56.25%}
+.aspect-ratio--4-3{padding-bottom:75%}
+.aspect-ratio--1-1{padding-bottom:100%}
+.aspect-ratio__content{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
